@@ -1,0 +1,97 @@
+=placeHolderColor($color)
+  &::-webkit-input-placeholder
+    color: $color
+  &::-moz-placeholder
+    color: $color
+  &:-ms-input-placeholder
+    color: $color
+
+=clearFix()
+  &:before,
+  &:after
+    display: table
+    content: ''
+    line-height: 0
+
+  &:after
+    clear: both
+
+=fillBlock
+  display: block
+  width: 100%
+  height: 100%
+
+=absFill($pos: absolute)
+  +fillBlock
+  position: $pos
+  top: 0
+  left: 0
+
+=smooth
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -webkit-backface-visibility: hidden
+  backface-visibility: hidden
+
+=rect($w,$h,$type:block)
+  display: $type
+  width: $w
+  height: $h
+
+=img($dire: true)
+  img
+    @if($dire)
+      width: 100%
+      height: auto
+    @else
+      width: auto
+      height: 100%
+
+    @content
+
+
+// ===================================
+=bars($w: 16px, $h: 1px, $color: #fff)
+  .bars
+    span,
+    &:before,
+    &:after
+      +baInit($w, $h)
+      top: 50%
+      left: 50%
+      margin:
+        top: $h * -0.5
+        left: $w * -0.5
+
+      background-color: $color
+      transition: opacity .4s, transform .4s
+
+    +b
+      transform: translateY(-6px)
+    +a
+      transform: translateY( 6px)
+
+    @content
+
+
+=bars-close($w: 16px, $h: 1px, $color: #fff)
+  .bars
+    +ba
+      +baInit($w, $h)
+      top: 50%
+      left: 50%
+      margin:
+        top: $h * -0.5
+        left: $w * -0.5
+
+      background-color: $color
+
+    +b
+      transform: rotate( 45deg)
+    +a
+      transform: rotate(-45deg)
+
+    span
+      opacity: 0
+
+    @content
