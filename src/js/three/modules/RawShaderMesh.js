@@ -1,4 +1,4 @@
-import { PlaneBufferGeometry, RawShaderMaterial, Mesh, Math as _Math } from 'three';
+import { PlaneBufferGeometry, RawShaderMaterial, Mesh, Math as _Math, Vector2 } from 'three';
 
 
 import vertexShader from '../shaders/vertex.vs';
@@ -13,9 +13,13 @@ export default class RawShaderMesh {
          * @type {{time: {type: string, value: number}}}
          */
         this.uniforms = {
-            uTime: {
+            time: {
                 type: 'f',
                 value: 0
+            },
+            resolution: {
+                type: 'v2',
+                value: new Vector2()
             }
         };
 
@@ -46,6 +50,9 @@ export default class RawShaderMesh {
         } );
 
         this.mesh = new Mesh( this.geometry, this.material );
+
+        this.uniforms.resolution.value.x = 1;
+        this.uniforms.resolution.value.y = 1;
     }
 
     /**
@@ -53,6 +60,6 @@ export default class RawShaderMesh {
      * @param cnt {number}
      */
     update( cnt ) {
-        this.uniforms.uTime.value = _Math.degToRad( cnt );
+        this.uniforms.time.value = _Math.degToRad( cnt );
     }
 }

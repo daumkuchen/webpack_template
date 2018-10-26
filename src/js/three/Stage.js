@@ -104,7 +104,7 @@ export default class Stage {
      */
     setup() {
         this._camera.position.y = 0;
-        this._camera.position.z = 5;
+        this._camera.position.z = 2;
         // this._camera.lookAt( 0, 0, 0 );
         // ==========================================
         this._renderer.setClearColor( 0x010c22, 0.0 );

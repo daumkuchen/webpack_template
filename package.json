@@ -1,5 +1,5 @@
 {
-  "name": "webpack_template_three",
+  "name": "webpack_template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -47,7 +47,7 @@
     "webpack-notifier": "^1.6.0"
   },
   "private": true,
-  "author": "tac0810",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "D": "^1.0.0",

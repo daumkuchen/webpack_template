@@ -242,9 +242,9 @@ module.exports = env => {
         // devtool: PRODUCTION ? '' : 'source-map'
     };
 
-    // WebGL
+    // Stage
     // --------------------------------------------------
-    const webglBuildConfig = {
+    const stageBuildConfig = {
         context: CONFIG.SRC,
         entry: {
             stage: './js/three/Stage.js'
@@ -305,5 +305,5 @@ module.exports = env => {
         // devtool: PRODUCTION ? '' : 'source-map'
     };
 
-    return [pugBuildConfig, sassBuildConfig, jsBuildConfig, webglBuildConfig];
+    return [pugBuildConfig, sassBuildConfig, jsBuildConfig, stageBuildConfig];
 };
