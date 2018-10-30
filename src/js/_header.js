@@ -21,7 +21,8 @@ if ( window.OTHER ) {
     //IE
     if ( window.BROWSER.indexOf( 'ie' ) !== -1 ) {
         window.isIE = true;
-        $( 'html' ).addClass( 'is-ie' );
+        // $( 'html' ).addClass( 'is-ie' );
+        document.querySelector('html').classList.add('is-ie');
     }
 
 }

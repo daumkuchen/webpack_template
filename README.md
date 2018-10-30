@@ -10,10 +10,11 @@ $ npm run watch
 * sass(postcss)
 * js(babel)
 * three.js
-* jquery
 * gsap
 * browser-sync
 
+### deprecation
+* jquery
 
 
 

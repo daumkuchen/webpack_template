@@ -4,7 +4,6 @@ import routes from 'js/app/routes/routes';
 import BaseControllerManager from "js/app/routes/BaseControllerManager";
 
 
-
 /**
  * @type {ViewController}
  */
