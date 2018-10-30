@@ -75,8 +75,8 @@ export default class Stage {
          * @private
          */
         this._mouseRatio = {
-            x: 0.01,
-            y: 0.01
+            x: 0.1,
+            y: 0.1
         };
 
         /**
@@ -135,7 +135,7 @@ export default class Stage {
      *
      * @private
      */
-    _update() {
+    update() {
         this._mousePos.x += (this._mouse.x - this._mousePos.x) * this._mouseRatio.x;
         this._mousePos.y += (this._mouse.y - this._mousePos.y) * this._mouseRatio.y;
 
@@ -143,6 +143,7 @@ export default class Stage {
         this._cnt = this._cnt % 360;
 
         this._rawShaderMesh.update( this._cnt );
+        this._rawShaderMesh.mouseMoved( this._mousePos.x, this._mousePos.y );
     }
 
     /**
@@ -150,7 +151,7 @@ export default class Stage {
      * @public
      */
     render() {
-        this._update();
+        this.update();
 
         this._renderer.render( this._scene, this._camera );
 
@@ -172,11 +173,14 @@ export default class Stage {
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize( window.innerWidth, window.innerHeight );
+
+        this._rawShaderMesh.resize( window.innerWidth, window.innerHeight );
     }
+
 
     scroll(st) {
-
     }
+
 }
 
 window.Stage = Stage;

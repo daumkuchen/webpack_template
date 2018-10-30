@@ -51,8 +51,8 @@ export default class RawShaderMesh {
 
         this.mesh = new Mesh( this.geometry, this.material );
 
-        this.uniforms.resolution.value.x = 1;
-        this.uniforms.resolution.value.y = 1;
+        this.uniforms.resolution.value.x = window.innerWidth;
+        this.uniforms.resolution.value.y = window.innerHeight;
     }
 
     /**
@@ -62,4 +62,23 @@ export default class RawShaderMesh {
     update( cnt ) {
         this.uniforms.time.value = _Math.degToRad( cnt );
     }
+
+    /**
+     *
+     * @param width, height {number}
+     */
+    resize(width, height) {
+        this.uniforms.resolution.value.x = width;
+        this.uniforms.resolution.value.y = height;
+    }
+
+    /**
+     *
+     * @param x, y {number}
+     */
+    mouseMoved(x, y) {
+        this.mesh.position.x = x * .1;
+        this.mesh.position.y = y * .1;
+    }
+
 }
