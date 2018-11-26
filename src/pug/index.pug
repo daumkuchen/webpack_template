@@ -1,19 +1,13 @@
--
-    var title = ''
-    var pageTitle = ''
-    var description = ''
-    var keywords = ''
-    var absolute = ''
+extends _inc/_layout.pug
 
-doctype html
-html(lang='ja')
-
-    include _inc/_head
-
-    body
-        //- include _inc/_header.pug
-        //- include _inc/_footer.pug
-
-        #stage
-
-        include _inc/_script.pug
+block var
+    -
+        var title = ''
+        var pageTitle = ''
+        var description = ''
+        var keywords = ''
+        var absolute = ''
+        var bodyID = 'top'
+        
+block main
+    #stage

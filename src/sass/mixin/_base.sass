@@ -16,11 +16,11 @@
   position: $pos
 
 =first
-  &:first-child
+  &:first-of-type
     @content
 
 =last
-  &:last-child
+  &:last-of-type
     @content
 
 =even()
@@ -35,6 +35,11 @@
   &:nth-of-type(#{$n})
     @content
 
-=hover
-  &:hover
+=last-nth($n)
+  &:nth-of-type(#{$n})
     @content
+
+=hover
+  +min-screen($mobile-l + 1)
+    &:hover
+      @content

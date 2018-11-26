@@ -218,10 +218,10 @@ module.exports = env => {
         },
         plugins: [
             new webpack.ProvidePlugin({
-                // '$': 'jquery',
-                // 'jquery': 'jquery',
-                // 'window.jQuery': 'jquery',
-                // 'jQuery': 'jquery',
+                '$': 'jquery',
+                'jquery': 'jquery',
+                'window.jQuery': 'jquery',
+                'jQuery': 'jquery',
                 'TweenLite': 'gsap/src/uncompressed/TweenLite',
                 'Promise': 'es6-promise',
             }),

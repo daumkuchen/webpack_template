@@ -1,26 +1,41 @@
+import UIHeader from 'js/modules/UIHeader';
+import HoverManager from 'js/modules/HoverManager';
+
 export default class ViewController {
     constructor() {
 
-        /**
-         *
-         * @type {Stage}
-         */
-        this.stage = null;
+        this.SWITCH_WIDTH = 768;
+        this.windowInnerHeight = window.innerHeight;
+        this.windowInnerWidth = window.innerWidth;
+
     }
 
     /**
      * @public
      */
-    viewWillLoad() {}
+    beforeLoad() {
+
+    }
 
     /**
      * @public
      */
-    viewDidLoad() {
-        this.stage = new window.Stage();
-        this.stage.setup();
-        this.stage.render();
+    viewWillLoad() {
+
+        // this.uIHeader = new UIHeader();
+        // this.uIHeader.run();
+
+        // this.hover = new HoverManager();
+        // if(this.windowInnerWidth > this.SWITCH_WIDTH) {
+        //     this.hover.run();
+        // }
+
     }
+
+    /**
+     * @public
+     */
+    viewDidLoad() {}
 
     /**
      * @public
@@ -35,7 +50,12 @@ export default class ViewController {
     /**
      * @public
      */
-    resize() {}
+    resize() {
+
+        this.windowInnerHeight = window.innerHeight;
+        this.windowInnerWidth = window.innerWidth;
+
+    }
 
     /**
      *
@@ -43,6 +63,9 @@ export default class ViewController {
      * @public
      */
     scroll(st) {
-        this.stage.scroll(st);
+
+        // this.uIHeader.scroll(st);
+
     }
+
 }

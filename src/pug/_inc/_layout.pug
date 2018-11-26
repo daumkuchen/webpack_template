@@ -1,0 +1,22 @@
+block var
+
+doctype html
+html(lang='ja')
+
+    include _head
+
+    body(id=bodyID)
+
+        #wrapper
+
+            include _header.pug
+                block header
+
+            main
+                block main
+
+            include _footer.pug
+                block footer
+
+            include _script.pug
+                block script

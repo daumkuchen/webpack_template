@@ -75,6 +75,7 @@ return o4.y * d.y + o4.x * (1.0 - d.y);
 }
 
 void main() {
+
 	vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 	uv *= 5.;
 	float r = snoise(vec3(uv.x, uv.y, time * .5));
@@ -82,4 +83,5 @@ void main() {
 	float b = snoise(vec3(uv.x, uv.y, time * .5));
 	vec3 color = vec3(r, g, b);
 	gl_FragColor = vec4(color, 1.);
+	
 }
