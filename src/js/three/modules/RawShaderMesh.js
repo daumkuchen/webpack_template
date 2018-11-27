@@ -27,7 +27,7 @@ export default class RawShaderMesh {
          *
          * @type {PlaneBufferGeometry}
          */
-        this.geometry = new PlaneBufferGeometry(width, height, 1);
+        this.geometry = null;
 
         /**
          *
@@ -45,13 +45,15 @@ export default class RawShaderMesh {
 
     setup() {
 
+        this.geometry = new PlaneBufferGeometry(1, 1, 1);
+
         this.material = new RawShaderMaterial( {
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
             uniforms: this.uniforms
-        } );
+        });
 
-        this.mesh = new Mesh( this.geometry, this.material );
+        this.mesh = new Mesh(this.geometry, this.material);
 
         this.uniforms.resolution.value.x = window.innerWidth;
         this.uniforms.resolution.value.y = window.innerHeight;

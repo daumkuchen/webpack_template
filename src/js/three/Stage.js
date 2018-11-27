@@ -181,7 +181,7 @@ export default class Stage {
 
         this._renderer.setSize(this.windowInnerWidth, this.windowInnerHeight);
         this._rawShaderMesh.resize(this.windowInnerWidth, this.windowInnerHeight);
-
+        
     }
 
 
