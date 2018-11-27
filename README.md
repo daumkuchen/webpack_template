@@ -12,11 +12,9 @@ $ npm run watch
 * three.js
 * gsap
 * browser-sync
-
-### deprecation
 * jquery
 
-
+### deprecation
 
 
 
