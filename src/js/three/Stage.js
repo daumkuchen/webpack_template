@@ -2,6 +2,9 @@ import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 import RawShaderMesh from './modules/RawShaderMesh';
 
+import Stats from './lib/Stats';
+import * as dat from 'dat.gui';
+
 export default class Stage {
     constructor() {
 
@@ -93,12 +96,14 @@ export default class Stage {
          */
         this._rawShaderMesh = new RawShaderMesh(1, 1);
 
-
-        this.stage = document.getElementById('stage');
-
         this.windowInnerWidth = window.innerWidth;
         this.windowInnerHeight = window.innerHeight;
         this.SWITCH_WIDTH = 768;
+
+        this.stage = document.getElementById('stage');
+
+        this.stats = null;
+        this.dat = null;
 
     }
 
@@ -129,6 +134,9 @@ export default class Stage {
             };
         });
 
+        this._stats();
+        this._dat();
+
     }
 
     /**
@@ -136,6 +144,9 @@ export default class Stage {
      * @private
      */
     update() {
+
+        this.stats.begin();
+        this.stats.end();
         
         this._mousePos.x += (this._mouse.x - this._mousePos.x) * this._mouseRatio.x;
         this._mousePos.y += (this._mouse.y - this._mousePos.y) * this._mouseRatio.y;
@@ -182,11 +193,28 @@ export default class Stage {
 
         this._renderer.setSize(this.windowInnerWidth, this.windowInnerHeight);
         this._rawShaderMesh.resize(this.windowInnerWidth, this.windowInnerHeight);
-        
+
     }
 
-
     scroll(st) {
+    }
+
+    _stats() {
+
+        this.stats = new Stats();
+        this.stats.setMode(0);
+        this.stats.domElement.style.position = 'absolute';
+        this.stats.domElement.style.left = '0';
+        this.stats.domElement.style.top = '0';
+
+        document.body.appendChild(this.stats.domElement);
+
+    }
+
+    _dat() {
+
+        this.dat = new dat.GUI();
+    
     }
 
 }

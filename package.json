@@ -51,6 +51,7 @@
   "license": "MIT",
   "dependencies": {
     "D": "^1.0.0",
+    "dat.gui": "^0.7.3",
     "extract-loader": "^3.0.0"
   }
 }

@@ -13,6 +13,7 @@ $ npm run watch
 * gsap
 * browser-sync
 * jquery
+* dat.gui
 
 ### deprecation
 
