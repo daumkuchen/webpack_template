@@ -177,6 +177,7 @@ export default class Stage {
         this.windowInnerWidth = window.innerWidth;
         this.windowInnerHeight = window.innerHeight;
 
+        this._camera.aspect = this.windowInnerWidth / this.windowInnerHeight;
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize(this.windowInnerWidth, this.windowInnerHeight);
