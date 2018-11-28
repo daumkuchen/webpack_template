@@ -1,4 +1,4 @@
-import { PlaneBufferGeometry, RawShaderMaterial, Mesh, Math as _Math, Vector2 } from 'three';
+import { PlaneBufferGeometry, RawShaderMaterial, Mesh, Math as _Math, Vector2, DoubleSide } from 'three';
 
 
 import vertexShader from '../shaders/vertex.vs';
@@ -50,7 +50,8 @@ export default class RawShaderMesh {
         this.material = new RawShaderMaterial( {
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-            uniforms: this.uniforms
+            uniforms: this.uniforms,
+            side: DoubleSide,
         });
 
         this.mesh = new Mesh(this.geometry, this.material);

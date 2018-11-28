@@ -14,6 +14,7 @@ $ npm run watch
 * browser-sync
 * jquery
 * dat.gui
+* OrbitControls
 
 ### deprecation
 

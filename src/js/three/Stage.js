@@ -5,6 +5,8 @@ import RawShaderMesh from './modules/RawShaderMesh';
 import Stats from './lib/Stats';
 import * as dat from 'dat.gui';
 
+const OrbitControls = require('three-orbitcontrols');
+
 export default class Stage {
     constructor() {
 
@@ -39,6 +41,13 @@ export default class Stage {
             alpha: true
         } );
 
+        /**
+         *
+         * @type {Controls}
+         * @private
+         */
+        this.controls
+        
         /**
          *
          * @type {number}
@@ -96,6 +105,11 @@ export default class Stage {
          */
         this._rawShaderMesh = new RawShaderMesh(1, 1);
 
+        /**
+         *
+         * @type {Common}
+         * @private
+         */
         this.windowInnerWidth = window.innerWidth;
         this.windowInnerHeight = window.innerHeight;
         this.SWITCH_WIDTH = 768;
@@ -119,6 +133,8 @@ export default class Stage {
         this._renderer.setClearColor(0x000000, 0.);
         this._renderer.setSize(window.innerWidth, window.innerHeight);
         this._renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+        this.controls = new OrbitControls(this._camera, this._renderer.domElement);
 
         this._rawShaderMesh.setup();
         this._scene.add(this._rawShaderMesh.mesh);
