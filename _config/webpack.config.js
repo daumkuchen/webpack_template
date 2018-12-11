@@ -305,5 +305,5 @@ module.exports = env => {
         // devtool: PRODUCTION ? '' : 'source-map'
     };
 
-    return [pugBuildConfig, sassBuildConfig, jsBuildConfig, stageBuildConfig];
+    return [/*pugBuildConfig,*/ sassBuildConfig, jsBuildConfig, stageBuildConfig];
 };
