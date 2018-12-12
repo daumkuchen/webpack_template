@@ -14,7 +14,7 @@ export default class UserAgent {
      * @private
      */
     _init() {
-        let u = window.navigator.userAgent.toLowerCase();
+        var u = window.navigator.userAgent.toLowerCase();
         this.tablet = (u.indexOf( "windows" ) !== -1 && u.indexOf( "touch" ) !== -1 && u.indexOf( "tablet pc" ) === -1)
             || u.indexOf( "ipad" ) !== -1
             || (u.indexOf( "android" ) !== -1 && u.indexOf( "mobile" ) === -1)
@@ -37,7 +37,7 @@ export default class UserAgent {
      * @private
      */
     _addDevice() {
-        let $html = document.querySelector( 'html' );
+        var $html = document.querySelector( 'html' );
         if ( this.tablet ) {
             $html.setAttribute( 'class', 'is-tablet' )
         } else if ( this.mobile ) {
@@ -55,7 +55,7 @@ export default class UserAgent {
      * https://qiita.com/Evolutor_web/items/162bfcf83695c83f1077
      * @returns {string}
      */
-    static getBrowser() {
+    getBrowser() {
         let ua = window.navigator.userAgent.toLowerCase();
         let ver = window.navigator.appVersion.toLowerCase();
         let name = 'unknown';
@@ -64,15 +64,20 @@ export default class UserAgent {
         let isIE = null;
         let ieVersion = null;
         let userAgent = window.navigator.userAgent.toLowerCase();
-        if ( userAgent.match( /(msie|MSIE)/ ) || userAgent.match( /(T|t)rident/ ) ) {
+
+        if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) || userAgent.indexOf("edge") !== -1 ) {
             isIE = true;
-            ieVersion = userAgent.match( /((msie|MSIE)\s|rv:)([\d\.]+)/ )[ 3 ];
-            ieVersion = parseInt( ieVersion );
+            if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
+                ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
+                ieVersion = parseInt(ieVersion);
+            } else {
+                ieVersion = 'edge';
+            }
         } else {
             isIE = false;
         }
 
-        if ( isIE ) {
+        if(isIE){
             name = 'ie' + ieVersion
         } else {
             if ( ua.indexOf( 'chrome' ) !== -1 ) {
@@ -85,7 +90,6 @@ export default class UserAgent {
                 name = 'firefox';
             }
         }
-
         return name;
     }
 
@@ -94,8 +98,8 @@ export default class UserAgent {
      * @param browsers
      * @returns {boolean}
      */
-    static isSupported( browsers ) {
-        let thusBrowser = UserAgent.getBrowser();
+    isSupported( browsers ) {
+        let thusBrowser = this.getBrowser();
         for ( let i = 0; i < browsers.length; i++ ) {
             if ( browsers[ i ] === thusBrowser ) {
                 return true;
@@ -108,7 +112,7 @@ export default class UserAgent {
      * https://hacknote.jp/archives/6631/
      * @returns {Number}
      */
-    static androidVersion() {
+    androidVersion() {
         let ua = window.navigator.userAgent.toLowerCase();
         if ( ua.indexOf( "android" ) > 0 ) {
             return parseFloat( ua.slice( ua.indexOf( "android" ) + 8 ) );
@@ -118,19 +122,15 @@ export default class UserAgent {
 
     }
 
-    /**
-     *
-     * @return {boolean}
-     */
-    static isMajor() {
-        return !(window.navigator.userAgent.indexOf( "DoCoMo" ) === -1 && window.navigator.userAgent.indexOf( "KDDI" ) === -1 && window.navigator.userAgent.indexOf( "Vodafone" ) === -1 && window.navigator.userAgent.indexOf( "SoftBank" ) === -1);
+    isMajor(){
+        return !(window.navigator.userAgent.indexOf("DoCoMo") === -1 && window.navigator.userAgent.indexOf("KDDI") === -1 && window.navigator.userAgent.indexOf("Vodafone") === -1 && window.navigator.userAgent.indexOf("SoftBank") === -1);
     }
 
     /**
      * https://hacknote.jp/archives/22633/
      *
      */
-    static iphoneVersion() {
+    iphoneVersion() {
         let u = window.navigator.userAgent.toLowerCase();
         let version = u.match( /iphone os ([\d]+)_([\d]+)_([\d]+)/ );
         if ( !version ) {
@@ -143,7 +143,7 @@ export default class UserAgent {
      * https://qiita.com/narikei/items/ada44891cb0902efc165
      * @returns {boolean}
      */
-    static isAndroidBrowser() {
+    isAndroidBrowser() {
         let ua = window.navigator.userAgent.toLowerCase();
         return /android/.test( ua ) && /linux; u;/.test( ua ) && !/chrome/.test( ua );
     }

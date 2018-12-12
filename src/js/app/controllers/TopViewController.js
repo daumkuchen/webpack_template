@@ -1,51 +1,32 @@
 import ViewController from "./ViewController";
 
 export default class TopViewController extends ViewController {
-    constructor() {
+    constructor(content) {
 
-        super();
+        super(content);
 
         this.stage = null;
 
     }
 
-    /**
-     * @public
-     */
-    beforeLoad() {
-
-    }
-
-    /**
-     * @public
-     */
     viewWillLoad() {
 
         super.viewWillLoad();
 
     }
 
-    /**
-     * @override
-     */
     viewDidLoad() {
 
         super.viewDidLoad();
 
     }
 
-    /**
-     * @override
-     */
     viewWillAppear() {
 
         super.viewWillAppear();
 
     }
 
-    /**
-     * @override
-     */
     viewDidAppear() {
 
         super.viewDidAppear();
@@ -56,21 +37,27 @@ export default class TopViewController extends ViewController {
 
     }
 
-    /**
-     * @override
-     */
+    viewWillDisappear() {
+
+        super.viewWillDisappear();
+
+    }
+
+    viewDidDisappear() {
+
+        super.viewDidDisappear();
+
+    }
+
     resize() {
 
         super.resize();
-        
+
     }
 
-    /**
-     * @override
-     */
     scroll(st) {
 
-        super.scroll(st);
+        super.scroll();
 
     }
 

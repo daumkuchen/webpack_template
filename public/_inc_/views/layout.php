@@ -10,7 +10,7 @@ $this_page = BaseViewController::get_attribute( $current );; ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<meta http-equiv="imagetoolbar" content="no">
 		<?php if ( UA == 'tablet' ): ?>
-			<meta name="viewport" content="width=1000">
+			<meta name="viewport" content="width=1024">
 		<?php else: ?>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, viewport-fit=cover">
 		<?php endif; ?>
@@ -81,9 +81,9 @@ $this_page = BaseViewController::get_attribute( $current );; ?>
 	<noscript>
 		<div id="noscript_message">Your browser either doesn't support Javascript or you have it turned off. Please enable JavaScript to view this content.</div>
 	</noscript>
-	<body id="top">
+	<body class="page-fixed">
 
-		<div id="wrapper">
+		<div id="wrap">
 
 			<!-- Header -->
 			<?php BaseViewController::get_header(); ?>

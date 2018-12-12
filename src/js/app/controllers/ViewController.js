@@ -2,7 +2,7 @@ import UIHeader from 'js/modules/UIHeader';
 import HoverManager from 'js/modules/HoverManager';
 
 export default class ViewController {
-    constructor() {
+    constructor(content) {
 
         this.SWITCH_WIDTH = 768;
         this.windowInnerHeight = window.innerHeight;
@@ -10,16 +10,6 @@ export default class ViewController {
 
     }
 
-    /**
-     * @public
-     */
-    beforeLoad() {
-
-    }
-
-    /**
-     * @public
-     */
     viewWillLoad() {
 
         // this.uIHeader = new UIHeader();
@@ -32,24 +22,16 @@ export default class ViewController {
 
     }
 
-    /**
-     * @public
-     */
     viewDidLoad() {}
 
-    /**
-     * @public
-     */
     viewWillAppear() {}
 
-    /**
-     * @public
-     */
     viewDidAppear() {}
 
-    /**
-     * @public
-     */
+    viewWillDisappear() {}
+
+    viewDidDisappear() {}
+
     resize() {
 
         this.windowInnerHeight = window.innerHeight;
@@ -57,11 +39,6 @@ export default class ViewController {
 
     }
 
-    /**
-     *
-     * @param st {number}
-     * @public
-     */
     scroll(st) {
 
         // this.uIHeader.scroll(st);

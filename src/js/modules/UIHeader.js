@@ -1,4 +1,4 @@
-import Utility from './../utils/Utility';
+import Utility from './../utility/Utility';
 import { TweenMax, TweenLite } from 'gsap';
 
 export default class UIHeader {

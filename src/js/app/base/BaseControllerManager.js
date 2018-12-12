@@ -3,7 +3,7 @@ export default class BaseControllerManager {
 
         /**
          *
-         * @type {{}}
+         * @type {Array}
          * @private
          */
         this._VC = ViewControllers;
@@ -14,7 +14,6 @@ export default class BaseControllerManager {
          * @private
          */
         this._controllers = [];
-
     }
 
     /**
@@ -63,8 +62,8 @@ export default class BaseControllerManager {
      */
     getController( ID = null, content = null ) {
 
-        let controller = null;
-        if ( ID !== null && isSet( this._VC[ ID ] ) ) {
+        var controller = null;
+        if ( ID !== null && ( this._VC[ ID ] !== null && this._VC[ ID ] !== undefined ) ) {
             controller = new this._VC[ ID ]( content );
         } else if ( content !== null && isSet( this._VC[ content.attr( 'data-use-controller' ) ] ) ) {
             controller = new this._VC[ content.attr( 'data-use-controller' ) ]( content );
