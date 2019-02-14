@@ -1,9 +1,8 @@
 import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
-import RawShaderMesh from './modules/RawShaderMesh';
-
-import Stats from './lib/Stats';
-import * as dat from 'dat.gui';
+import RawShaderMesh from 'js/three/modules/RawShaderMesh';
+import Stats from 'js/three/modules/Stats';
+import Dat from 'js/three/modules/Dat';
 
 const OrbitControls = require('three-orbitcontrols');
 
@@ -46,7 +45,7 @@ export default class Stage {
          * @type {Controls}
          * @private
          */
-        this.controls
+        this.controls = null;
         
         /**
          *
@@ -76,7 +75,7 @@ export default class Stage {
          * @type {{x: number, y: number}}
          * @private
          */
-        this._mousePos = {
+        this._mouse_pos = {
             x: 0,
             y: 0
         };
@@ -86,38 +85,55 @@ export default class Stage {
          * @type {{x: number, y: number}}
          * @private
          */
-        this._mouseRatio = {
-            x: 0.1,
-            y: 0.1
+        this._mouse_ratio = {
+            x: .1,
+            y: .1
         };
-
-        /**
-         *
-         * @type {number}
-         * @private
-         */
-        this._initWidth = window.innerWidth;
 
         /**
          *
          * @type {RawShaderMesh}
          * @private
          */
-        this._rawShaderMesh = new RawShaderMesh(1, 1);
+        this._rawShaderMesh = new RawShaderMesh();
+
+        /**
+         *
+         * @type {Stats}
+         * @private
+         */
+        this.stats = new Stats();
+
+        /**
+         *
+         * @type {Stats}
+         * @private
+         */
+        this.dat = new Dat();
 
         /**
          *
          * @type {Common}
          * @private
          */
-        this.windowInnerWidth = window.innerWidth;
-        this.windowInnerHeight = window.innerHeight;
+        this.window_inner_width = window.innerWidth;
+        this.window_Inner_height = window.innerHeight;
         this.SWITCH_WIDTH = 768;
+
+        /**
+         *
+         * @type {Dom}
+         * @private
+         */
 
         this.stage = document.getElementById('stage');
 
-        this.stats = null;
-        this.dat = null;
+        /**
+         *
+         * @type {Status, Flag}
+         * @private
+         */
+
 
     }
 
@@ -150,8 +166,8 @@ export default class Stage {
             };
         });
 
-        this._stats();
-        this._dat();
+        this.stats.setup();
+        this.dat.setup();
 
     }
 
@@ -161,18 +177,17 @@ export default class Stage {
      */
     update() {
 
-        this.stats.begin();
-        this.stats.end();
-        
-        this._mousePos.x += (this._mouse.x - this._mousePos.x) * this._mouseRatio.x;
-        this._mousePos.y += (this._mouse.y - this._mousePos.y) * this._mouseRatio.y;
-
         this._cnt += this._speed;
         this._cnt = this._cnt % 360;
 
+        this._mouse_pos.x += (this._mouse.x - this._mouse_pos.x) * this._mouse_ratio.x;
+        this._mouse_pos.y += (this._mouse.y - this._mouse_pos.y) * this._mouse_ratio.y;
+
         this._rawShaderMesh.update(this._cnt);
-        this._rawShaderMesh.mouseMoved(this._mousePos.x, this._mousePos.y);
-        
+        this._rawShaderMesh.mouseMoved(this._mouse_pos.x, this._mouse_pos.y);
+
+        this.stats.update();
+
     }
 
     /**
@@ -184,9 +199,6 @@ export default class Stage {
         this.update();
 
         this._renderer.render(this._scene, this._camera);
-
-        // if (this._rendering) cancelAnimationFrame(this._rendering);
-        // this._rendering = requestAnimationFrame(this.render.bind(this));
 
         window.addEventListener('keydown', (e) => {
             this._rendering = e.keyCode !== 27;
@@ -201,36 +213,18 @@ export default class Stage {
      */
     resize() {
 
-        this.windowInnerWidth = window.innerWidth;
-        this.windowInnerHeight = window.innerHeight;
+        this.window_inner_width = window.innerWidth;
+        this.window_Inner_height = window.innerHeight;
 
-        this._camera.aspect = this.windowInnerWidth / this.windowInnerHeight;
+        this._camera.aspect = this.window_inner_width / this.window_Inner_height;
         this._camera.updateProjectionMatrix();
 
-        this._renderer.setSize(this.windowInnerWidth, this.windowInnerHeight);
-        this._rawShaderMesh.resize(this.windowInnerWidth, this.windowInnerHeight);
+        this._renderer.setSize(this.window_inner_width, this.window_Inner_height);
+        this._rawShaderMesh.resize(this.window_inner_width, this.window_Inner_height);
 
     }
 
     scroll(st) {
-    }
-
-    _stats() {
-
-        this.stats = new Stats();
-        this.stats.setMode(0);
-        this.stats.domElement.style.position = 'absolute';
-        this.stats.domElement.style.left = '0';
-        this.stats.domElement.style.top = '0';
-
-        document.body.appendChild(this.stats.domElement);
-
-    }
-
-    _dat() {
-
-        this.dat = new dat.GUI();
-    
     }
 
 }

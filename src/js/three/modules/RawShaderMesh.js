@@ -1,12 +1,16 @@
-import { PlaneBufferGeometry, RawShaderMaterial, Mesh, Math as _Math, Vector2, DoubleSide } from 'three';
-
+import {
+    PlaneBufferGeometry,
+    RawShaderMaterial,
+    Mesh, Math as _Math,
+    Vector2,
+    DoubleSide
+} from 'three';
 
 import vertexShader from '../shaders/vertex.vs';
 import fragmentShader from '../shaders/fragment.fs';
 
-
 export default class RawShaderMesh {
-    constructor( width, height ) {
+    constructor() {
 
         /**
          *
@@ -55,7 +59,9 @@ export default class RawShaderMesh {
         });
 
         this.mesh = new Mesh(this.geometry, this.material);
-
+        this.mesh.material.dispose();
+        this.mesh.geometry.dispose();
+        
         this.uniforms.resolution.value.x = window.innerWidth;
         this.uniforms.resolution.value.y = window.innerHeight;
 
