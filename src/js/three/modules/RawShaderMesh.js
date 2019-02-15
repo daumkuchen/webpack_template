@@ -6,8 +6,8 @@ import {
     DoubleSide
 } from 'three';
 
-import vertexShader from '../shaders/vertex.vs';
-import fragmentShader from '../shaders/fragment.fs';
+import vertexShader from 'js/three/shaders/rawshadermesh.vs';
+import fragmentShader from 'js/three/shaders/rawshadermesh.fs';
 
 export default class RawShaderMesh {
     constructor() {

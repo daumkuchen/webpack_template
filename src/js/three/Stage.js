@@ -1,4 +1,9 @@
-import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import {
+    PerspectiveCamera,
+    Scene,
+    WebGLRenderer, WebGLRenderTarget,
+    NearestFilter, ClampToEdgeWrapping,
+} from 'three';
 
 import RawShaderMesh from 'js/three/modules/RawShaderMesh';
 import Stats from 'js/three/modules/Stats';
@@ -28,7 +33,9 @@ export default class Stage {
          * @type {Scene}
          * @private
          */
-        this._scene = new Scene();
+        this._scene = {
+            base: new Scene(),
+        };
 
         /**
          *
@@ -38,7 +45,27 @@ export default class Stage {
         this._renderer = new WebGLRenderer( {
             antialias: true,
             alpha: true
-        } );
+        });
+
+        /**
+         *
+         * @type {WebGLRenderTarget}
+         * @private
+         */
+        this._renderer_target_elm = new WebGLRenderTarget(
+            this.window_inner_width,
+            this.window_inner_height,
+            {
+                magFilter: NearestFilter,
+                minFilter: NearestFilter,
+                wrapS: ClampToEdgeWrapping,
+                wrapT: ClampToEdgeWrapping,
+            }
+        );
+
+        this._renderer_target = {
+            base: this._renderer_target_elm.clone(),
+        }
 
         /**
          *
@@ -153,7 +180,7 @@ export default class Stage {
         this.controls = new OrbitControls(this._camera, this._renderer.domElement);
 
         this._rawShaderMesh.setup();
-        this._scene.add(this._rawShaderMesh.mesh);
+        this._scene.base.add(this._rawShaderMesh.mesh);
 
         this.stage.appendChild(this._renderer.domElement);
 
@@ -198,7 +225,7 @@ export default class Stage {
 
         this.update();
 
-        this._renderer.render(this._scene, this._camera);
+        this._renderer.render(this._scene.base, this._camera);
 
         window.addEventListener('keydown', (e) => {
             this._rendering = e.keyCode !== 27;
