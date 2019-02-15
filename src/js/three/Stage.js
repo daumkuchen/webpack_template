@@ -8,6 +8,7 @@ import {
 import RawShaderMesh from 'js/three/modules/RawShaderMesh';
 import Stats from 'js/three/modules/Stats';
 import Dat from 'js/three/modules/Dat';
+import Fx from 'js/three/modules/Fx';
 
 const OrbitControls = require('three-orbitcontrols');
 
@@ -35,6 +36,7 @@ export default class Stage {
          */
         this._scene = {
             base: new Scene(),
+            fx: new Scene(),
         };
 
         /**
@@ -126,6 +128,13 @@ export default class Stage {
 
         /**
          *
+         * @type {Fx}
+         * @private
+         */
+        this.fx = new Fx(this._renderer_target.base.texture);
+
+        /**
+         *
          * @type {Stats}
          * @private
          */
@@ -133,7 +142,7 @@ export default class Stage {
 
         /**
          *
-         * @type {Stats}
+         * @type {Dat}
          * @private
          */
         this.dat = new Dat();
@@ -146,6 +155,7 @@ export default class Stage {
         this.window_inner_width = window.innerWidth;
         this.window_Inner_height = window.innerHeight;
         this.SWITCH_WIDTH = 768;
+        this.dpr = window.devicePixelRatio || 1;
 
         /**
          *
@@ -161,7 +171,6 @@ export default class Stage {
          * @private
          */
 
-
     }
 
     /**
@@ -174,13 +183,18 @@ export default class Stage {
         // this._camera.lookAt(0, 0, 0);
 
         this._renderer.setClearColor(0x000000, 0.);
-        this._renderer.setSize(window.innerWidth, window.innerHeight);
         this._renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+        this._renderer.setSize(window.innerWidth, window.innerHeight);
+        this._renderer_target.base.setSize(window.innerWidth * this.dpr, window.innerHeight * this.dpr);
 
         this.controls = new OrbitControls(this._camera, this._renderer.domElement);
 
         this._rawShaderMesh.setup();
         this._scene.base.add(this._rawShaderMesh.mesh);
+
+        this.fx.setup();
+        this._scene.fx.add(this.fx.mesh);
 
         this.stage.appendChild(this._renderer.domElement);
 
@@ -211,6 +225,8 @@ export default class Stage {
         this._mouse_pos.y += (this._mouse.y - this._mouse_pos.y) * this._mouse_ratio.y;
 
         this._rawShaderMesh.update(this._cnt);
+        this.fx.update(this._cnt);
+
         this._rawShaderMesh.mouseMoved(this._mouse_pos.x, this._mouse_pos.y);
 
         this.stats.update();
@@ -225,7 +241,8 @@ export default class Stage {
 
         this.update();
 
-        this._renderer.render(this._scene.base, this._camera);
+        this._renderer.render(this._scene.base, this._camera, this._renderer_target.base);
+        this._renderer.render(this._scene.fx, this._camera);
 
         window.addEventListener('keydown', (e) => {
             this._rendering = e.keyCode !== 27;
@@ -247,11 +264,22 @@ export default class Stage {
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize(this.window_inner_width, this.window_Inner_height);
+        this._renderer_target.base.setSize(window.innerWidth * this.dpr, window.innerHeight * this.dpr);
+
         this._rawShaderMesh.resize(this.window_inner_width, this.window_Inner_height);
 
     }
 
+    /**
+     * @public
+     */
     scroll(st) {
+    }
+
+    /**
+     * @public
+     */
+    destroy() {
     }
 
 }
