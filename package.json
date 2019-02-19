@@ -55,6 +55,8 @@
     "D": "^1.0.0",
     "dat.gui": "^0.7.3",
     "extract-loader": "^3.0.0",
+    "glslify-loader": "^2.0.0",
+    "raw-loader": "^1.0.0",
     "three-orbitcontrols": "^2.96.3",
     "three-svg-loader": "^0.1.0"
   }

@@ -13,8 +13,7 @@ varying vec2 vUv;
 void main() {
 
     vec4 tex = texture2D(texture, vUv);
-    vec4 dest = vec4(tex.rgb + cos(time * 10.) * .5, tex.a);
-
+    vec4 dest = vec4(tex.rgb, tex.a);
     gl_FragColor = dest;
 
 }

@@ -260,34 +260,52 @@ module.exports = env => {
             }
         },
         module: {
-            rules: [{
-                test: /\.js$/,
-                include: CONFIG.SRC + '/js',
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            ['es2015', {
-                                modules: false
-                            }]
-                        ]
-                    }
-                }]
-            }, {
-                test: /\.(glsl|vs|fs)$/,
-                include: CONFIG.SRC + '/js',
-                use: [{
-                    loader: 'shader-loader'
-                }]
-            }, {
-                test: /\.(png|jpg|gif)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        // limit: 8192
-                    }
-                }]
-            }]
+            rules: [
+                {
+                    test: /\.js$/,
+                    include: CONFIG.SRC + '/js',
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['es2015', {
+                                    modules: false
+                                }]
+                            ]
+                        }
+                    }]
+                }, {
+                    test: /\.(glsl|vs|fs|vert|frag)$/,
+                    include: CONFIG.SRC + '/js',
+                    use: [
+                        'raw-loader',{
+                            loader: 'glslify-loader',
+                            // options: {
+                            //     transform: [
+                            //         ['glslify-hex', { 'option-1': true, 'option-2': 42 }]
+                            //     ]
+                            // }
+                        }
+                    ]
+                },
+                /*{
+                    test: /\.(glsl|vs|fs|vert|frag)$/,
+                    include: CONFIG.SRC + '/js',
+                    use: [{
+                        loader: 'shader-loader',
+                    }]
+                },*/
+                {
+                    test: /\.(png|jpg|gif)$/,
+                    use: [{
+                        loader: 'url-loader',
+                        options: {
+                            // limit: 8192
+                        }
+                    }]
+                }
+                
+            ]
         },
         plugins: [
             new webpack.ProvidePlugin({
@@ -304,6 +322,6 @@ module.exports = env => {
         ],
         // devtool: PRODUCTION ? '' : 'source-map'
     };
-
+    
     return [/*pugBuildConfig,*/ sassBuildConfig, jsBuildConfig, stageBuildConfig];
 };
