@@ -1,8 +1,8 @@
 import App from "./app/App";
 import FxRouter from "./app/routers/FxRouter";
 import VcRouter from "./app/routers/VcRouter";
-import 'waypoints/lib/jquery.waypoints';
 import Utility from "js/utility/Utility";
+// import 'waypoints/lib/jquery.waypoints';
 
 require( './_header' );
 
@@ -12,26 +12,33 @@ APP.debug = process.env.NODE_ENV === 'development';
 APP.sendAnalytics = path => {
     gtag('config', 'UA-123055862-1', {'page_path': path});
 };
-
 APP.boot();
+
+
+window._develop = {};
+window._develop.stage = new window.Stage();
+
+
+// Utility.noScroll();
+
 
 let initWindowWidth = window.innerWidth;
 
-Utility.noScroll();
 
-window.addEventListener( 'resize', function () {
-    if ( initWindowWidth > 768 ) {
-        if ( window.innerWidth <= 768 ) {
+window.addEventListener('resize', function() {
+    if(initWindowWidth > 768) {
+        if (window.innerWidth <= 768) {
             location.reload();
         }
     } else {
-        if ( window.innerWidth > 768 ) {
+        if (window.innerWidth > 768) {
             location.reload();
         }
     }
+}, false);
 
-}, false );
 
+/*
 window.onload = () => {
     setTimeout( () => {
         $( 'body' ).addClass( 'is-page-opened' );
@@ -57,7 +64,9 @@ window.onload = () => {
 
     }, 1000 );
 };
+*/
 
+/*
 window.setWayPointsDidAppear = function () {
     let $way = $( '.waypoint-did-appear' );
 
@@ -74,12 +83,14 @@ window.setWayPointsDidAppear = function () {
         } );
     }
 };
+*/
 
 
 /**
  *
  * @private
  */
+/*
 window.setWayPoints = function () {
     let $container = $( '.waypoint-container' ),
         $way = $( '.waypoint' );
@@ -100,3 +111,4 @@ window.setWayPoints = function () {
         } );
     }
 }
+*/

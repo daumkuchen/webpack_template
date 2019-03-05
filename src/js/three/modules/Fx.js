@@ -38,6 +38,22 @@ export default class Fx {
                 type: 't',
                 value: texture || null
             },
+            color_r: {
+                type: 'f',
+                value: 1,
+            },
+            color_g: {
+                type: 'f',
+                value: 1,
+            },
+            color_b: {
+                type: 'f',
+                value: 1,
+            },
+            power: {
+                type: 'f',
+                value: 1,
+            },
         };
 
         /**

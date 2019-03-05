@@ -6,9 +6,9 @@ import {
 } from 'three';
 
 import RawShaderMesh from 'js/three/modules/RawShaderMesh';
-import Stats from 'js/three/modules/Stats';
 import Dat from 'js/three/modules/Dat';
 import Fx from 'js/three/modules/Fx';
+import Stats from 'js/three/vendors/Stats';
 
 const OrbitControls = require('three-orbitcontrols');
 
@@ -55,8 +55,8 @@ export default class Stage {
          * @private
          */
         this._renderer_target_elm = new WebGLRenderTarget(
-            this.window_inner_width,
-            this.window_inner_height,
+            window.innerWidth,
+            window.innerHeight,
             {
                 magFilter: NearestFilter,
                 minFilter: NearestFilter,
