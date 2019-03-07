@@ -6,10 +6,11 @@ import {
 } from 'three';
 
 import RawShaderMesh from 'js/three/modules/RawShaderMesh';
-import Dat from 'js/three/modules/Dat';
+// import Dat from 'js/three/modules/Dat';
 import Fx from 'js/three/modules/Fx';
 import Stats from 'js/three/vendors/Stats';
 
+import * as dat from 'dat.gui';
 const OrbitControls = require('three-orbitcontrols');
 
 export default class Stage {
@@ -124,7 +125,7 @@ export default class Stage {
          * @type {RawShaderMesh}
          * @private
          */
-        this._rawShaderMesh = new RawShaderMesh();
+        this.raw_shader_mesh = new RawShaderMesh();
 
         /**
          *
@@ -145,7 +146,8 @@ export default class Stage {
          * @type {Dat}
          * @private
          */
-        this.dat = new Dat();
+        // this.dat = new Dat();
+        this.dat = new dat.GUI();
 
         /**
          *
@@ -190,8 +192,8 @@ export default class Stage {
 
         this.controls = new OrbitControls(this._camera, this._renderer.domElement);
 
-        this._rawShaderMesh.setup();
-        this._scene.base.add(this._rawShaderMesh.mesh);
+        this.raw_shader_mesh.setup();
+        this._scene.base.add(this.raw_shader_mesh.mesh);
 
         this.fx.setup();
         this._scene.fx.add(this.fx.mesh);
@@ -208,7 +210,8 @@ export default class Stage {
         });
 
         this.stats.setup();
-        this.dat.setup();
+        // this.dat.setup();
+        this._datSetup();
 
     }
 
@@ -224,10 +227,10 @@ export default class Stage {
         this._mouse_pos.x += (this._mouse.x - this._mouse_pos.x) * this._mouse_ratio.x;
         this._mouse_pos.y += (this._mouse.y - this._mouse_pos.y) * this._mouse_ratio.y;
 
-        this._rawShaderMesh.update(this._cnt);
+        this.raw_shader_mesh.update(this._cnt);
         this.fx.update(this._cnt);
 
-        this._rawShaderMesh.mouseMoved(this._mouse_pos.x, this._mouse_pos.y);
+        this.raw_shader_mesh.mouseMoved(this._mouse_pos.x, this._mouse_pos.y);
 
         this.stats.update();
 
@@ -266,7 +269,7 @@ export default class Stage {
         this._renderer.setSize(this.window_inner_width, this.window_Inner_height);
         this._renderer_target.base.setSize(window.innerWidth * this.dpr, window.innerHeight * this.dpr);
 
-        this._rawShaderMesh.resize(this.window_inner_width, this.window_Inner_height);
+        this.raw_shader_mesh.resize(this.window_inner_width, this.window_Inner_height);
 
     }
 
@@ -280,6 +283,54 @@ export default class Stage {
      * @public
      */
     destroy() {
+    }
+
+    _datSetup() {
+        
+        /**
+         *
+         * @type {color}
+         */
+        let color = {
+            controls: new function() {
+                this.R = 1;
+                this.G = 1;
+                this.B = 1;
+            },
+            folder: this.dat.addFolder('color')
+        }
+
+        color.folder.add(color.controls, 'R', 0, 1, 0.01).onChange((value) => {
+            this.raw_shader_mesh.uniforms.color_r.value = value;
+        });
+
+        color.folder.add(color.controls, 'G', 0, 1, 0.01).onChange((value) => {
+            this.raw_shader_mesh.uniforms.color_g.value = value;
+        });
+
+        color.folder.add(color.controls, 'B', 0, 1, 0.01).onChange((value) => {
+            this.raw_shader_mesh.uniforms.color_b.value = value;
+        });
+
+        color.folder.open();
+
+        /**
+         *
+         * @type {noise}
+         */
+        let noise = {
+            controls: new function() {
+                this.range = 1;
+            },
+            folder: this.dat.addFolder('noise')
+        }
+
+        noise.folder.add(noise.controls, 'range', 1, 10, 0.01).onChange((value) => {
+            this.raw_shader_mesh.uniforms.noise_range.value = value;
+        });
+
+        noise.folder.open();
+
     }
 
 }

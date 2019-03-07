@@ -1,5 +1,5 @@
 import {
-    PlaneBufferGeometry,
+    PlaneBufferGeometry, SphereBufferGeometry,
     RawShaderMaterial,
     Mesh, Math as _Math,
     Vector2,
@@ -24,7 +24,23 @@ export default class RawShaderMesh {
             resolution: {
                 type: 'v2',
                 value: new Vector2()
-            }
+            },
+            color_r: {
+                type: 'f',
+                value: 1,
+            },
+            color_g: {
+                type: 'f',
+                value: 1,
+            },
+            color_b: {
+                type: 'f',
+                value: 1,
+            },
+            noise_range: {
+                type: 'f',
+                value: 1,
+            },
         };
 
         /**
@@ -49,7 +65,8 @@ export default class RawShaderMesh {
 
     setup() {
 
-        this.geometry = new PlaneBufferGeometry(1, 1, 1);
+        // this.geometry = new PlaneBufferGeometry(1, 1, 1);
+        this.geometry = new SphereBufferGeometry(.65, 64, 64);
 
         this.material = new RawShaderMaterial( {
             vertexShader: vertexShader,
