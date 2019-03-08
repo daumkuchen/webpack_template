@@ -222,7 +222,7 @@ export default class Stage {
     update() {
 
         this._cnt += this._speed;
-        this._cnt = this._cnt % 360;
+        // this._cnt = this._cnt % 360;
 
         this._mouse_pos.x += (this._mouse.x - this._mouse_pos.x) * this._mouse_ratio.x;
         this._mouse_pos.y += (this._mouse.y - this._mouse_pos.y) * this._mouse_ratio.y;

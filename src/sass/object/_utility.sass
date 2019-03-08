@@ -1,28 +1,4 @@
-@import "../mixin/index"
-
-.u-pc__show
-    display: block
-
-    +max-screen()
-        display: none
-
-.u-sp__show
-    display: none
-
-    +max-screen()
-        display: block
-
-
-@for $i from 1 to 200
-
-    .u-mt__#{$i * 10}
-        margin-top: #{$i * 10}px
-
-    .u-mb__#{$i * 10}
-        margin-bottom: #{$i * 10}px
-
-    .u-ml__#{$i * 10}
-        margin-left: #{$i * 10}px
-
-    .u-mr__#{$i * 10}
-        margin-right: #{$i * 10}px
+@import "utility/responsive"
+@import "utility/margin"
+@import "utility/padding"
+@import "utility/align"
