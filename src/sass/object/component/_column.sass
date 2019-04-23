@@ -1,0 +1,35 @@
+@import "../../_mixin/index"
+
+$min-width: 100
+$max-width: 1000
+
+.c-column
+    display: flex
+    justify-content: space-between
+    align-items: stretch
+    align-content: stretch
+    flex-wrap: wrap
+
+    +max-screen($mobile-l)
+        display: block
+
+    &__reverse
+        flex-direction: row-reverse
+
+    &-2
+
+        @for $width from $min-width to $max-width
+
+            &__#{$width}
+
+                &--min
+                    width: #{$width}px
+
+                    +max-screen($mobile-l)
+                        width: 100%
+
+                &--max
+                    width: calc(100% - #{$width}px)
+
+                    +max-screen($mobile-l)
+                        width: 100%

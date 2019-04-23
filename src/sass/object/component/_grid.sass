@@ -1,0 +1,57 @@
+@import "../../_mixin/index"
+
+$min-split: 2
+$max-split: 4
+$min-padding: 10
+$max-padding: 150
+$min-wrap: 0
+$max-wrap: 10
+
+.c-grid
+    display: flex
+    justify-content: space-between
+    align-items: stretch
+    align-content: stretch
+    flex-wrap: wrap
+    
+    @for $split from $min-split to ($max-split + 1)
+
+        &-#{$split}
+            
+            $column_width: 100% / #{$split}
+
+            .c-grid__child
+                width: $column_width
+
+            &__padding
+                
+                @for $padding from $min-padding to ($max-padding + 10)
+
+                    &-#{$padding}
+
+                        $ratio: #{$padding / ($padding / 10)}
+
+                        @if $split == 2
+                            .c-grid__child
+                                width: calc(#{$column_width} - #{$padding / $split}px)
+                        @else
+                            .c-grid__child
+                                width: calc(#{$column_width} - #{$padding / $split * ($split - 1)}px)
+
+        &__wrap
+            
+            +max-screen($mobile-l)
+
+                @for $wrap from $min-wrap to ($max-wrap + 1)
+
+                    &-#{$wrap}
+
+                        .c-grid__child
+                            +nth-child(-n+#{$wrap - 1})
+                                width: 100%
+                            +nth-child(n+#{$wrap})
+                                width: calc(50% - 7px)
+                                
+    .c-grid__child
+        +max-screen($mobile-l)
+            width: 100%

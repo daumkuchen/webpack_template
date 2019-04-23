@@ -1,0 +1,30 @@
+@import "../../_mixin/index"
+
+$min-count: 100
+$max-count: 2000
+
+@for $i from $min-count to $max-count
+
+    .u-max-width__#{$i}
+        max-width: #{$i}px
+        width: 100%
+        margin: 0 auto
+        
+        +max-screen($mobile-l)
+            max-width: 100%
+
+        &-fix
+            max-width: #{$i}px
+            width: 100%
+            margin: 0 auto
+            
+    .u-fit-width__#{$i}
+        $page_width: (100% - (#{$i}px / 2))
+        $page_margin: calc((100% - #{$i}px) / 2)
+        
+        width: calc(#{$i}px + (#{$page_width}))
+        margin: 0 0 0 #{$page_margin}
+        
+        +max-screen(#{$i}px)
+            width: 100%
+            margin: 0

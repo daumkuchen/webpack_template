@@ -3,11 +3,23 @@
 .u-pc__show
     display: block
 
-    +max-screen()
+    +max-screen($mobile-l)
         display: none
+
+    &--inline
+        display: inline
+
+        +max-screen($mobile-l)
+            display: none
 
 .u-sp__show
     display: none
 
-    +max-screen()
+    +max-screen($mobile-l)
         display: block
+
+    &--inline
+        display: none
+
+        +max-screen($mobile-l)
+            display: inline

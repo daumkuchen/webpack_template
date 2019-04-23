@@ -1,47 +1,73 @@
 @import "../../_mixin/index"
 
-@for $i from 1 to 200
+$count: 5
+$min-count: 0
+$max-count: 200
+$switch-pc: $mobile-l + 1
+$switch-tb: $tablet
+$switch-sp: $mobile-l
 
-    .u-mt__#{$i * 5}
-        margin-top: #{$i * 5}px
+.u-ma
+    margin: auto
+    
+    &__lr
+        margin: 0 auto
 
-    .u-mb__#{$i * 5}
-        margin-bottom: #{$i * 5}px
 
-    .u-ml__#{$i * 5}
-        margin-left: #{$i * 5}px
+@for $i from $min-count to $max-count
 
-    .u-mr__#{$i * 5}
-        margin-right: #{$i * 5}px
+    .u-mt__#{$i * $count}
+        margin-top: #{$i * $count}px
+
+    .u-mb__#{$i * $count}
+        margin-bottom: #{$i * $count}px
+
+    .u-ml__#{$i * $count}
+        margin-left: #{$i * $count}px
+
+    .u-mr__#{$i * $count}
+        margin-right: #{$i * $count}px
         
-    .u-mt__#{$i * 5}
+    .u-mt__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                margin-top: #{$i * 5}px
+            +min-screen($switch-pc)
+                margin-top: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                margin-top: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                margin-top: #{$i * 5}px
+            +max-screen($switch-sp)
+                margin-top: #{$i * $count}px
 
-    .u-mb__#{$i * 5}
+    .u-mb__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                margin-bottom: #{$i * 5}px
+            +min-screen($switch-pc)
+                margin-bottom: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                margin-bottom: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                margin-bottom: #{$i * 5}px
+            +max-screen($switch-sp)
+                margin-bottom: #{$i * $count}px
 
-    .u-ml__#{$i * 5}
+    .u-ml__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                margin-left: #{$i * 5}px
+            +min-screen($switch-pc)
+                margin-left: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                margin-left: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                margin-left: #{$i * 5}px
+            +max-screen($switch-sp)
+                margin-left: #{$i * $count}px
 
-    .u-mr__#{$i * 5}
+    .u-mr__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                margin-right: #{$i * 5}px
+            +min-screen($switch-pc)
+                margin-right: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                margin-right: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                margin-right: #{$i * 5}px
+            +max-screen($switch-sp)
+                margin-right: #{$i * $count}px

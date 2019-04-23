@@ -1,47 +1,73 @@
 @import "../../_mixin/index"
 
-@for $i from 1 to 200
+$count: 5
+$min-count: 0
+$max-count: 200
+$switch-pc: $mobile-l + 1
+$switch-tb: $tablet
+$switch-sp: $mobile-l
 
-    .u-pt__#{$i * 5}
-        padding-top: #{$i * 5}px
+.u-pa
+    padding: auto
+    
+    &__lr
+        padding: 0 auto
 
-    .u-pb__#{$i * 5}
-        padding-bottom: #{$i * 5}px
 
-    .u-pl__#{$i * 5}
-        padding-left: #{$i * 5}px
+@for $i from $min-count to $max-count
 
-    .u-pr__#{$i * 5}
-        padding-right: #{$i * 5}px
+    .u-pt__#{$i * $count}
+        padding-top: #{$i * $count}px
 
-    .u-pt__#{$i * 5}
+    .u-pb__#{$i * $count}
+        padding-bottom: #{$i * $count}px
+
+    .u-pl__#{$i * $count}
+        padding-left: #{$i * $count}px
+
+    .u-pr__#{$i * $count}
+        padding-right: #{$i * $count}px
+
+    .u-pt__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                padding-top: #{$i * 5}px
+            +min-screen($switch-pc)
+                padding-top: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                padding-top: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                padding-top: #{$i * 5}px
+            +max-screen($switch-sp)
+                padding-top: #{$i * $count}px
 
-    .u-pb__#{$i * 5}
+    .u-pb__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                padding-bottom: #{$i * 5}px
+            +min-screen($switch-pc)
+                padding-bottom: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                padding-bottom: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                padding-bottom: #{$i * 5}px
+            +max-screen($switch-sp)
+                padding-bottom: #{$i * $count}px
 
-    .u-pl__#{$i * 5}
+    .u-pl__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                padding-left: #{$i * 5}px
+            +min-screen($switch-pc)
+                padding-left: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                padding-left: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                padding-left: #{$i * 5}px
-
-    .u-pr__#{$i * 5}
+            +max-screen($switch-sp)
+                padding-left: #{$i * $count}px
+                
+    .u-pr__#{$i * $count}
         &--pc
-            +min-screen($mobile-l)
-                padding-right: #{$i * 5}px
+            +min-screen($switch-pc)
+                padding-right: #{$i * $count}px
+        &--tb
+            +screen($switch-sp, $switch-tb)
+                padding-right: #{$i * $count}px
         &--sp
-            +max-screen($mobile-l)
-                padding-right: #{$i * 5}px
+            +max-screen($switch-sp)
+                padding-right: #{$i * $count}px

@@ -19,8 +19,16 @@
   &:first-of-type
     @content
 
+=first-child
+  &:first-child
+    @content
+
 =last
   &:last-of-type
+    @content
+
+=last-child
+  &:last-child
     @content
 
 =even()
@@ -35,8 +43,8 @@
   &:nth-of-type(#{$n})
     @content
 
-=last-nth($n)
-  &:nth-of-type(#{$n})
+=nth-child($n)
+  &:nth-child(#{$n})
     @content
 
 =hover
